@@ -1,0 +1,41 @@
+const express = require("express");
+const webpush = require("web-push");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const vapidKeys = {
+    publicKey: "YOUR_PUBLIC_KEY_HERE",
+    privateKey: "YOUR_PRIVATE_KEY_HERE"
+};
+
+webpush.setVapidDetails(
+    "mailto:your-email@example.com",
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+);
+
+let subscribers = [];
+
+// Store subscription from frontend
+app.post("/subscribe", (req, res) => {
+    const subscription = req.body;
+    subscribers.push(subscription);
+    res.status(201).json({});
+});
+
+// Send notification to all subscribers
+app.post("/sendNotification", async (req, res) => {
+    const payload = JSON.stringify({
+        title: "Game Notification",
+        body: "Your team plays in 30 minutes!",
+        icon: "/images/logo.png"
+    });
+
+    subscribers.forEach(sub => webpush.sendNotification(sub, payload).catch(console.error));
+    res.status(200).send("Notification sent");
+});
+
+app.listen(4000, () => console.log("Server started on port 4000"));
