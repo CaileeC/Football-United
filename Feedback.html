@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Streaming Service — Customer Feedback</title>
+  <style>
+    :root{ --bg:#f6f7fb; --card:#ffffff; --accent:#0b67ff; --muted:#6b7280; --success:#0f9d58; }
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); margin:0; padding:32px; color:#111827}
+    .container{max-width:900px;margin:0 auto}
+    .card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    h1{font-size:1.5rem;margin:0 0 8px}
+    p.lead{color:var(--muted);margin-top:0}
+
+    form .row{display:flex;gap:16px;flex-wrap:wrap}
+    label{display:block;font-size:0.9rem;margin-bottom:6px}
+    input[type=text], input[type=email], select, textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:0.95rem}
+    textarea{min-height:110px;resize:vertical}
+    .small{font-size:0.85rem;color:var(--muted)}
+
+    .teams-list{display:flex;flex-wrap:wrap;gap:8px}
+    .team-chip{padding:8px 10px;border-radius:999px;border:1px solid #e6e9ef;background:#fafbff;cursor:pointer}
+    .team-chip.selected{background:linear-gradient(90deg,var(--accent)22%, #6aa6ff22);border-color:var(--accent);color:var(--accent);font-weight:600}
+
+    .rating{display:flex;gap:6px;align-items:center}
+    .star{font-size:1.25rem;cursor:pointer}
+
+    .actions{display:flex;gap:12px;align-items:center;margin-top:18px}
+    button{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(11,103,255,0.12)}
+    .notice{padding:10px;border-radius:8px;background:#f0fdf6;color:var(--success);display:none}
+
+    @media(min-width:720px){
+      .col-2{flex:1 1 calc(50% - 8px)}
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card" role="region" aria-labelledby="feedback-title">
+      <h1 id="feedback-title">We'd love your feedback</h1>
+      <p class="lead">Tell us how we can improve your team-focused streaming experience. Choose the team(s) you subscribe to, rate your satisfaction, and share any comments.</p>
+
+      <form id="feedbackForm" class="feedback-form" action="#" method="POST">
+        <div class="row">
+          <div class="col-2" style="flex-basis:320px;">
+            <label for="email">Email (optional)</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+            <p class="small">We'll use this only if we need to follow up.</p>
+
+            <label for="subscriptionId" style="margin-top:12px">Subscription ID (optional)</label>
+            <input id="subscriptionId" name="subscriptionId" type="text" placeholder="SUB-00012345" />
+
+            <label style="margin-top:12px">Your team(s)</label>
+            <div class="teams-list" id="teamsList" role="list" aria-label="Teams list">
+              <!-- Team chips will be injected by JS; payload can come from server -->
+            </div>
+            <p class="small">Tap to select one or more teams. If you don't see your team, type it below.</p>
+
+            <label for="otherTeam" style="margin-top:8px">Other team (optional)</label>
+            <input id="otherTeam" name="otherTeam" type="text" placeholder="Type team name" />
+
+          </div>
+
+          <div class="col-2" style="flex-basis:320px;">
+            <label for="rating">Overall satisfaction</label>
+            <div id="rating" class="rating" role="radiogroup" aria-label="Rating 1 to 5">
+              <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">☆</span>
+              <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="0">☆</span>
+              <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="0">☆</span>
+              <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="0">☆</span>
+              <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="0">☆</span>
+              <input type="hidden" name="ratingValue" id="ratingValue" value="0" />
+            </div>
+            <p class="small">Click a star or use arrow keys when focused.</p>
+
+            <label for="feedbackType" style="margin-top:12px">Feedback type</label>
+            <select id="feedbackType" name="feedbackType">
+              <option value="general">General feedback</option>
+              <option value="bug">Bug report</option>
+              <option value="feature">Feature request</option>
+              <option value="billing">Billing issue</option>
+            </select>
+
+            <label for="message" style="margin-top:12px">Message</label>
+            <textarea id="message" name="message" placeholder="What happened? Be as specific as you can. Mention date/time, team name, and device if relevant."></textarea>
+
+            <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+              <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="anonymous" name="anonymous"> Submit anonymously</label>
+              <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="includeLogs" name="includeLogs"> Include diagnostic logs</label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Send feedback</button>
+          <button class="secondary" type="button" id="clearBtn">Clear</button>
+          <div class="notice" id="successNotice" role="status">Thanks — your feedback was sent.</div>
+        </div>
+      </form>
+
+      <details style="margin-top:14px">
+        <summary class="small">Developer notes</summary>
+        <div class="small" style="margin-top:8px">
+          This form expects a JSON POST to <code>/api/feedback</code> (changeable in script below). It sends: email, subscriptionId, teams[], otherTeam, rating, feedbackType, message, anonymous, includeLogs.
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <script>
+    // Small dataset of NFL teams — replace or request from backend
+    const defaultTeams = [
+  'Arizona Cardinals',
+  'Atlanta Falcons',
+  'Baltimore Ravens',
+  'Buffalo Bills',
+  'Carolina Panthers',
+  'Chicago Bears',
+  'Cincinnati Bengals',
+  'Cleveland Browns',
+  'Dallas Cowboys',
+  'Denver Broncos',
+  'Detroit Lions',
+  'Green Bay Packers',
+  'Houston Texans',
+  'Indianapolis Colts',
+  'Jacksonville Jaguars',
+  'Kansas City Chiefs',
+  'Las Vegas Raiders',
+  'Los Angeles Chargers',
+  'Los Angeles Rams',
+  'Miami Dolphins',
+  'Minnesota Vikings',
+  'New England Patriots',
+  'New Orleans Saints',
+  'New York Giants',
+  'New York Jets',
+  'Philadelphia Eagles',
+  'Pittsburgh Steelers',
+  'San Francisco 49ers',
+  'Seattle Seahawks',
+  'Tampa Bay Buccaneers',
+  'Tennessee Titans',
+  'Washington Commanders'
+];
+
+    const teamsListEl = document.getElementById('teamsList');
+    const selectedTeams = new Set();
+
+    function renderTeams(list){
+      teamsListEl.innerHTML = '';
+      list.forEach(team => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'team-chip';
+        btn.textContent = team;
+        btn.setAttribute('aria-pressed','false');
+        btn.addEventListener('click', () => toggleTeam(btn, team));
+        teamsListEl.appendChild(btn);
+      })
+    }
+
+    function toggleTeam(btn, team){
+      if(selectedTeams.has(team)){
+        selectedTeams.delete(team);
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed','false');
+      } else {
+        selectedTeams.add(team);
+        btn.classList.add('selected');
+        btn.setAttribute('aria-pressed','true');
+      }
+    }
+
+    renderTeams(defaultTeams);
+
+    // Rating control
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('ratingValue');
+    let currentRating = 0;
+
+    function paintStars(n){
+      stars.forEach(s => s.textContent = (Number(s.dataset.value) <= n) ? '★' : '☆');
+      ratingValue.value = n;
+      stars.forEach(s => s.setAttribute('aria-checked', Number(s.dataset.value) === n ? 'true' : 'false'));
+    }
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => { currentRating = Number(star.dataset.value); paintStars(currentRating); });
+      star.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowRight' || e.key === 'ArrowUp'){
+          currentRating = Math.min(5, currentRating + 1);
+          paintStars(currentRating);
+        } else if(e.key === 'ArrowLeft' || e.key === 'ArrowDown'){
+          currentRating = Math.max(1, currentRating - 1);
+          paintStars(currentRating);
+        } else if(e.key === 'Enter' || e.key === ' '){
+          currentRating = Number(star.dataset.value); paintStars(currentRating);
+        }
+      })
+    });
+
+    // Form submission disabled — traditional HTML form used.
+// (JS submit handler removed as per Option 3)
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic client-side validation
+      const message = document.getElementById('message').value.trim();
+      if(!message){
+        alert('Please tell us what happened in the message box.');
+        document.getElementById('message').focus();
+        return;
+      }
+
+      const payload = {
+        email: document.getElementById('email').value || null,
+        subscriptionId: document.getElementById('subscriptionId').value || null,
+        teams: Array.from(selectedTeams),
+        otherTeam: document.getElementById('otherTeam').value || null,
+        rating: Number(document.getElementById('ratingValue').value) || null,
+        feedbackType: document.getElementById('feedbackType').value,
+        message,
+        anonymous: document.getElementById('anonymous').checked,
+        includeLogs: document.getElementById('includeLogs').checked,
+        submittedAt: new Date().toISOString()
+      };
+
+      try{
+        // NOTE: change the URL to your real endpoint. This example assumes JSON API.
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+
+        if(res.ok){
+          successNotice.style.display = 'block';
+          form.reset();
+          selectedTeams.clear();
+          document.querySelectorAll('.team-chip.selected').forEach(n => n.classList.remove('selected'));
+          paintStars(0);
+        } else {
+          const txt = await res.text();
+          alert('Server error when submitting feedback: ' + (txt || res.status));
+        }
+      } catch(err){
+        console.error(err);
+        alert('Network error: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>
+
