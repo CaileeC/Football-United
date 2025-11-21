@@ -5,6 +5,8 @@ Currently done:
 4. 
 
 Still Working On:
-1. login
+1. Login
 2. Database
-3. 
+3. Secure Payment
+4. Customer Feedback
+5. Cart/Checkout
