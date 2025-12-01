@@ -180,38 +180,38 @@ html lang="en">
           <tr><th>Select</th><th>Team</th><th>Price</th></tr>
         </thead>
         <tbody>
-          <tr class="ARI"><td><input type="checkbox"></td><td>Arizona Cardinals</td><td>$9.99</td></tr>
-          <tr class="ATL"><td><input type="checkbox"></td><td>Atlanta Falcons</td><td>$9.99</td></tr>
-          <tr class="BAL"><td><input type="checkbox"></td><td>Baltimore Ravens</td><td>$9.99</td></tr>
-          <tr class="BUF"><td><input type="checkbox"></td><td>Buffalo Bills</td><td>$9.99</td></tr>
-          <tr class="CAR"><td><input type="checkbox"></td><td>Carolina Panthers</td><td>$9.99</td></tr>
-          <tr class="CHI"><td><input type="checkbox"></td><td>Chicago Bears</td><td>$9.99</td></tr>
-          <tr class="CIN"><td><input type="checkbox"></td><td>Cincinnati Bengals</td><td>$9.99</td></tr>
-          <tr class="CLE"><td><input type="checkbox"></td><td>Cleveland Browns</td><td>$9.99</td></tr>
-          <tr class="DAL"><td><input type="checkbox"></td><td>Dallas Cowboys</td><td>$9.99</td></tr>
-          <tr class="DEN"><td><input type="checkbox"></td><td>Denver Broncos</td><td>$9.99</td></tr>
-          <tr class="DET"><td><input type="checkbox"></td><td>Detroit Lions</td><td>$9.99</td></tr>
-          <tr class="GB"><td><input type="checkbox"></td><td>Green Bay Packers</td><td>$9.99</td></tr>
-          <tr class="HOU"><td><input type="checkbox"></td><td>Houston Texans</td><td>$9.99</td></tr>
-          <tr class="IND"><td><input type="checkbox"></td><td>Indianapolis Colts</td><td>$9.99</td></tr>
-          <tr class="JAX"><td><input type="checkbox"></td><td>Jacksonville Jaguars</td><td>$9.99</td></tr>
-          <tr class="KC"><td><input type="checkbox"></td><td>Kansas City Chiefs</td><td>$9.99</td></tr>
-          <tr class="LV"><td><input type="checkbox"></td><td>Las Vegas Raiders</td><td>$9.99</td></tr>
-          <tr class="LAC"><td><input type="checkbox"></td><td>Los Angeles Chargers</td><td>$9.99</td></tr>
-          <tr class="LAR"><td><input type="checkbox"></td><td>Los Angeles Rams</td><td>$9.99</td></tr>
-          <tr class="MIA"><td><input type="checkbox"></td><td>Miami Dolphins</td><td>$9.99</td></tr>
-          <tr class="MIN"><td><input type="checkbox"></td><td>Minnesota Vikings</td><td>$9.99</td></tr>
-          <tr class="NE"><td><input type="checkbox"></td><td>New England Patriots</td><td>$9.99</td></tr>
-          <tr class="NO"><td><input type="checkbox"></td><td>New Orleans Saints</td><td>$9.99</td></tr>
-          <tr class="NYG"><td><input type="checkbox"></td><td>New York Giants</td><td>$9.99</td></tr>
-          <tr class="NYJ"><td><input type="checkbox"></td><td>New York Jets</td><td>$9.99</td></tr>
-          <tr class="PHI"><td><input type="checkbox"></td><td>Philadelphia Eagles</td><td>$9.99</td></tr>
-          <tr class="PIT"><td><input type="checkbox"></td><td>Pittsburgh Steelers</td><td>$9.99</td></tr>
-          <tr class="SEA"><td><input type="checkbox"></td><td>Seattle Seahawks</td><td>$9.99</td></tr>
-          <tr class="SF"><td><input type="checkbox"></td><td>San Francisco 49ers</td><td>$9.99</td></tr>
-          <tr class="TB"><td><input type="checkbox"></td><td>Tampa Bay Buccaneers</td><td>$9.99</td></tr>
-          <tr class="TEN"><td><input type="checkbox"></td><td>Tennessee Titans</td><td>$9.99</td></tr>
-          <tr class="WAS"><td><input type="checkbox"></td><td>Washington Commanders</td><td>$9.99</td></tr>
+          <tr class="ARI"><td><input type="checkbox"></td><td>Arizona Cardinals</td><td>$4.99</td></tr>
+          <tr class="ATL"><td><input type="checkbox"></td><td>Atlanta Falcons</td><td>$4.99</td></tr>
+          <tr class="BAL"><td><input type="checkbox"></td><td>Baltimore Ravens</td><td>$4.99</td></tr>
+          <tr class="BUF"><td><input type="checkbox"></td><td>Buffalo Bills</td><td>$4.99</td></tr>
+          <tr class="CAR"><td><input type="checkbox"></td><td>Carolina Panthers</td><td>$4.99</td></tr>
+          <tr class="CHI"><td><input type="checkbox"></td><td>Chicago Bears</td><td>$4.99</td></tr>
+          <tr class="CIN"><td><input type="checkbox"></td><td>Cincinnati Bengals</td><td>$4.99</td></tr>
+          <tr class="CLE"><td><input type="checkbox"></td><td>Cleveland Browns</td><td>$4.99</td></tr>
+          <tr class="DAL"><td><input type="checkbox"></td><td>Dallas Cowboys</td><td>$4.99</td></tr>
+          <tr class="DEN"><td><input type="checkbox"></td><td>Denver Broncos</td><td>$4.99</td></tr>
+          <tr class="DET"><td><input type="checkbox"></td><td>Detroit Lions</td><td>$4.99</td></tr>
+          <tr class="GB"><td><input type="checkbox"></td><td>Green Bay Packers</td><td>$4.99</td></tr>
+          <tr class="HOU"><td><input type="checkbox"></td><td>Houston Texans</td><td>$4.99</td></tr>
+          <tr class="IND"><td><input type="checkbox"></td><td>Indianapolis Colts</td><td>$4.99</td></tr>
+          <tr class="JAX"><td><input type="checkbox"></td><td>Jacksonville Jaguars</td><td>$4.99</td></tr>
+          <tr class="KC"><td><input type="checkbox"></td><td>Kansas City Chiefs</td><td>$4.99</td></tr>
+          <tr class="LV"><td><input type="checkbox"></td><td>Las Vegas Raiders</td><td>$4.99</td></tr>
+          <tr class="LAC"><td><input type="checkbox"></td><td>Los Angeles Chargers</td><td>$4.99</td></tr>
+          <tr class="LAR"><td><input type="checkbox"></td><td>Los Angeles Rams</td><td>$4.99</td></tr>
+          <tr class="MIA"><td><input type="checkbox"></td><td>Miami Dolphins</td><td>$4.99</td></tr>
+          <tr class="MIN"><td><input type="checkbox"></td><td>Minnesota Vikings</td><td>$4.99</td></tr>
+          <tr class="NE"><td><input type="checkbox"></td><td>New England Patriots</td><td>$4.99</td></tr>
+          <tr class="NO"><td><input type="checkbox"></td><td>New Orleans Saints</td><td>$4.99</td></tr>
+          <tr class="NYG"><td><input type="checkbox"></td><td>New York Giants</td><td>$4.99</td></tr>
+          <tr class="NYJ"><td><input type="checkbox"></td><td>New York Jets</td><td>$4.99</td></tr>
+          <tr class="PHI"><td><input type="checkbox"></td><td>Philadelphia Eagles</td><td>$4.99</td></tr>
+          <tr class="PIT"><td><input type="checkbox"></td><td>Pittsburgh Steelers</td><td>$4.99</td></tr>
+          <tr class="SEA"><td><input type="checkbox"></td><td>Seattle Seahawks</td><td>$4.99</td></tr>
+          <tr class="SF"><td><input type="checkbox"></td><td>San Francisco 49ers</td><td>$4.99</td></tr>
+          <tr class="TB"><td><input type="checkbox"></td><td>Tampa Bay Buccaneers</td><td>$4.99</td></tr>
+          <tr class="TEN"><td><input type="checkbox"></td><td>Tennessee Titans</td><td>$4.99</td></tr>
+          <tr class="WAS"><td><input type="checkbox"></td><td>Washington Commanders</td><td>$4.99</td></tr>
         </tbody>
       </table>
     </section>
